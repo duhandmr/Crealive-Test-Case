@@ -1,0 +1,32 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+html {
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.font-serif {
+  font-family: "DM Serif Display", serif;
+}
+
+.bordered-list li {
+  display: inline-flex;
+  position: relative;
+  list-style-type: none;
+}
+
+.bordered-list li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 1px;
+  background-color: #d1c5ac;
+}
