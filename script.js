@@ -260,7 +260,6 @@ const Register = (e) => {
       alert(`Kayıt başarıyla tamamlandı ${name}!`);
       const user = { email: emailVal, password: passwordVal, name: name };
       localStorage.setItem("user", JSON.stringify(user));
-      window.location.reload();
     } else {
       alert("Şifreler uyuşmuyor");
     }
