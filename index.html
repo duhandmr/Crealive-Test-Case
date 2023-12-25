@@ -4,7 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="styles.css" />
+
     <title>Nehir</title>
   </head>
   <body>
@@ -120,7 +129,10 @@
 
           <div>
             <ul class="flex flex-row gap-5">
-              <li class="flex flex-row items-center text-xs gap-1">
+              <li
+                id="login"
+                class="flex flex-row items-center text-xs gap-1 uppercase"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="31"
@@ -154,8 +166,9 @@
                   </defs>
                 </svg>
 
-                <a href="/login" data-page="login">GİRİŞ YAP</a>
+                <button onclick="LoginAndRegister()">GİRİŞ YAP</button>
               </li>
+
               <li class="flex flex-row items-center text-xs gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -233,9 +246,86 @@
       </div>
     </header>
 
+    <nav
+      class="hidden lg:block text-white py-4"
+      style="background-color: #232323"
+    >
+      <ul
+        class="flex flex-row justify-between lg:container lg:mx-auto font-bold relative"
+        style="font-size: 11px"
+      >
+        <li class="dropdownmenu">
+          <a href="#">EN YENİLER</a>
+          <ul class="submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
+        </li>
+        <li class="dropdownmenu">
+          <a href="#">ÇATAL KAŞIK BIÇAK</a>
+          <ul class="submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
+        </li>
+        <li class="dropdownmenu">
+          <a href="#">PORSELEN TAKIMLAR</a>
+          <ul class="submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
+        </li>
+        <li class="dropdownmenu">
+          <a href="#">ÇAY SETLERİ</a>
+          <ul class="submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
+        </li>
+        <li class="dropdownmenu">
+          <a href="#">MUTFAK YARDIMCILARI</a>
+          <ul class="submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
+        </li>
+        <li class="dropdownmenu">
+          <a href="#">TENCERE VE TAVALAR</a>
+          <ul class="submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
+        </li>
+        <li class="dropdownmenu">
+          <a href="#">ÇAYDANLIK VE CEZVE</a>
+          <ul class="submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
+        </li>
+        <li class="dropdownmenu">
+          <a href="#">ÇEYİZ SETLERİ</a>
+          <ul class="submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
+        </li>
+        <li class="dropdownmenu">
+          <a href="#">AYIN EN ÇOK SATANLARI</a>
+          <ul class="submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
     <header class="lg:hidden flex flex-col text-white py-3">
       <div class="flex justify-between items-center px-4">
-        <button id="menuBtn" class="text-black focus:outline-none">
+        <button
+          id="menuBtn"
+          class="cursor-pointer text-black focus:outline-none"
+        >
           <svg
             class="w-6 h-6"
             fill="none"
@@ -280,7 +370,7 @@
           </svg>
         </a>
         <div class="flex flex-row items-center gap-3">
-          <a href="/login" data-page="login">
+          <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="31"
@@ -313,7 +403,7 @@
                 </clipPath>
               </defs>
             </svg>
-          </a>
+          </button>
           <a href="#">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -429,47 +519,927 @@
       </div>
     </header>
 
-    <nav
-      class="hidden lg:block text-white py-4"
-      style="background-color: #232323"
-    >
-      <ul
-        class="flex flex-row justify-between lg:container lg:mx-auto font-bold whitespace-nowrap"
-        style="font-size: 11px"
-      >
-        <li>
+    <nav id="mobile-nav" class="mobile-nav lg:hidden p-5">
+      <div class="flex justify-between border-b border-black">
+        <h1>NEHİR</h1>
+        <button id="mobilemenuClose">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            width="24"
+            height="24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <ul class="pt-5 px-4">
+        <li class="mobile-dropdownmenu">
           <a href="#">EN YENİLER</a>
+          <ul class="mobile-submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
         </li>
-        <li>
+        <li class="mobile-dropdownmenu">
           <a href="#">ÇATAL KAŞIK BIÇAK</a>
+          <ul class="mobile-submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
         </li>
-        <li>
+        <li class="mobile-dropdownmenu">
           <a href="#">PORSELEN TAKIMLAR</a>
+          <ul class="mobile-submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
         </li>
-        <li>
+        <li class="mobile-dropdownmenu">
           <a href="#">ÇAY SETLERİ</a>
+          <ul class="mobile-submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
         </li>
-        <li>
+        <li class="mobile-dropdownmenu">
           <a href="#">MUTFAK YARDIMCILARI</a>
+          <ul class="mobile-submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
         </li>
-        <li>
+        <li class="mobile-dropdownmenu">
           <a href="#">TENCERE VE TAVALAR</a>
+          <ul class="mobile-submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
         </li>
-        <li>
+        <li class="mobile-dropdownmenu">
           <a href="#">ÇAYDANLIK VE CEZVE</a>
+          <ul class="mobile-submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
         </li>
-        <li>
+        <li class="mobile-dropdownmenu">
           <a href="#">ÇEYİZ SETLERİ</a>
+          <ul class="mobile-submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
         </li>
-        <li>
+        <li class="mobile-dropdownmenu">
           <a href="#">AYIN EN ÇOK SATANLARI</a>
+          <ul class="mobile-submenu">
+            <li><a href="#">Alt Kategori 1</a></li>
+            <li><a href="#">Alt Kategori 2</a></li>
+          </ul>
         </li>
       </ul>
     </nav>
 
-    <main id="content" class="py-5"></main>
+    <main class="py-5">
+      <div
+        class="lg:container lg:mx-auto flex flex-row gap-4 justify-center slider-container"
+      >
+        <ul class="slider overflow-hidden w-2/3">
+          <li>
+            <img src="./assets/threeonbig.png" alt="Slide 1" />
+          </li>
+          <li>
+            <img src="./assets/threeonbig.png" alt="Slide 1" />
+          </li>
+          <li>
+            <img src="./assets/threeonbig.png" alt="Slide 1" />
+          </li>
+        </ul>
+        <div class="lg:block hidden other-images w-1/3">
+          <img
+            src="./assets/threeonlittle.png"
+            style="padding-bottom: 40px"
+            alt="Slide 2"
+          />
+          <img src="./assets/threeonlittle.png" alt="Slide 3" />
+        </div>
+      </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+      <div class="lg:container lg:mx-auto">
+        <ul
+          class="flex flex-wrap lg:flex-row justify-between px-5 lg:px-20 lg:gap-6 pt-10 pb-16 font-bold whitespace-nowrap text-center"
+          style="font-size: 11px"
+        >
+          <li>
+            <a href="#">
+              <img src="./assets/catalyuvarlak.png" class="pb-2" />
+              <span>ÇATAL KAŞIK BIÇAK</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="./assets/kekkalıpları.png" class="pb-2" />
+              <span>KEK KALIPLARI</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="./assets/gözlemetavaları.png" class="pb-2" />
+              <span>GÖZLEME TAVALARI</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="./assets/çaysetleri.png" class="pb-2" />
+              <span>ÇAY SETLERİ</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="./assets/servistakımları.png" class="pb-2" />
+              <span>SERVİS TAKIMLARI</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="./assets/çaydanlıklar.png" class="pb-2" />
+              <span>ÇAYDANLIKLAR</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="./assets/cezveler.png" class="pb-2" />
+              <span>CEZVELER</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="./assets/tenceretava.png" class="pb-2" />
+              <span>TENCERE VE TAVALAR</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="lg:container lg:mx-auto pb-24">
+        <div class="flex flex-row items-center gap-4 px-4 pb-4">
+          <h1 class="font-serif font-semibold text-3xl">En Çok Satanlar</h1>
+          <a href="#" class="font-normal text-xs" style="color: #878787"
+            >TÜMÜNÜ GÖSTER (10)</a
+          >
+        </div>
+        <div>
+          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 px-2">
+            <li class="flex flex-col items-center justify-center text-center">
+              <div>
+                <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+              </div>
+              <div>
+                <p class="font-normal text-base py-5">
+                  LALEZAR SADE 89 PARÇA DERİ KUTULU SET
+                </p>
+                <span
+                  class="block font-semibold text-base"
+                  style="color: #9f2842"
+                  >5.175,00 TL</span
+                >
+              </div>
+            </li>
+            <li class="flex flex-col items-center justify-center text-center">
+              <div>
+                <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+              </div>
+              <div>
+                <p class="font-normal text-base py-5">
+                  MİLANO ALTIN SATEN 89 PARÇA DERİ KUTULU ÇATAL KAŞIK BIÇAK
+                  TAKIMI
+                </p>
+                <span
+                  class="block font-semibold text-base"
+                  style="color: #9f2842"
+                  >5.175,00 TL</span
+                >
+              </div>
+            </li>
+            <li class="flex flex-col items-center justify-center text-center">
+              <div>
+                <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+              </div>
+              <div>
+                <p class="font-normal text-base py-5">
+                  DALYAN SADE 72 PARÇA KUTULU ÇATAL KAŞIK BIÇAK TAKIMI
+                </p>
+                <span
+                  class="block font-semibold text-base"
+                  style="color: #9f2842"
+                  >5.175,00 TL</span
+                >
+              </div>
+            </li>
+            <li class="flex flex-col items-center justify-center text-center">
+              <div>
+                <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+              </div>
+              <div>
+                <p class="font-normal text-base py-5">
+                  LALEZAR SADE 89 PARÇA DERİ KUTULU SET
+                </p>
+                <span
+                  class="block font-semibold text-base"
+                  style="color: #9f2842"
+                  >5.175,00 TL</span
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lg:container lg:mx-auto">
+        <div class="flex flex-row items-center gap-4 px-4 pb-4">
+          <h1 class="font-serif font-semibold text-3xl">En Popüler Ürünler</h1>
+          <a href="#" class="font-normal text-xs" style="color: #878787"
+            >TÜMÜNÜ GÖSTER (12)</a
+          >
+        </div>
+        <ul class="most-popular-slider">
+          <li class="lg:pr-5">
+            <img src="/assets/lalezar.png" class="w-full h-auto" />
+            <div>
+              <p class="font-normal text-base py-5">
+                LALEZAR SADE 89 PARÇA DERİ KUTULU SET
+              </p>
+              <span class="block font-semibold text-base" style="color: #9f2842"
+                >5.175,00 TL</span
+              >
+            </div>
+          </li>
+          <li class="lg:pr-5">
+            <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+            <div>
+              <p class="font-normal text-base py-5">
+                MİLANO ALTIN SATEN 89 PARÇA DERİ KUTULU ÇATAL KAŞIK BIÇAK TAKIMI
+              </p>
+              <span class="block font-semibold text-base" style="color: #9f2842"
+                >5.175,00 TL</span
+              >
+            </div>
+          </li>
+          <li class="lg:pr-5">
+            <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+            <div>
+              <p class="font-normal text-base py-5">
+                DALYAN SADE 72 PARÇA KUTULU ÇATAL KAŞIK BIÇAK TAKIMI
+              </p>
+              <span class="block font-semibold text-base" style="color: #9f2842"
+                >5.175,00 TL</span
+              >
+            </div>
+          </li>
+          <li class="lg:pr-5">
+            <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+            <div>
+              <p class="font-normal text-base py-5">
+                LALEZAR SADE 89 PARÇA DERİ KUTULU SET
+              </p>
+              <span class="block font-semibold text-base" style="color: #9f2842"
+                >5.175,00 TL</span
+              >
+            </div>
+          </li>
+          <li class="lg:pr-5">
+            <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+            <div>
+              <p class="font-normal text-base py-5">
+                LALEZAR SADE 89 PARÇA DERİ KUTULU SET
+              </p>
+              <span class="block font-semibold text-base" style="color: #9f2842"
+                >5.175,00 TL</span
+              >
+            </div>
+          </li>
+          <li class="lg:pr-5">
+            <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+            <div>
+              <p class="font-normal text-base py-5">
+                LALEZAR SADE 89 PARÇA DERİ KUTULU SET
+              </p>
+              <span class="block font-semibold text-base" style="color: #9f2842"
+                >5.175,00 TL</span
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="hidden lg:block pt-24 pb-5">
+        <img src="/assets/bigphotobanner.png" />
+      </div>
+
+      <div class="lg:container lg:mx-auto">
+        <div class="flex flex-row items-center gap-4 px-4 pb-4">
+          <h1 class="font-serif font-semibold text-3xl">En Yeni Eklenenler</h1>
+          <a href="#" class="font-normal text-xs" style="color: #878787"
+            >TÜMÜNÜ GÖSTER (12)</a
+          >
+        </div>
+        <div>
+          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 px-2">
+            <li class="flex flex-col items-center justify-center text-center">
+              <div>
+                <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+              </div>
+              <div>
+                <p class="font-normal text-base py-5">
+                  LALEZAR SADE 89 PARÇA DERİ KUTULU SET
+                </p>
+                <span
+                  class="block font-semibold text-base"
+                  style="color: #9f2842"
+                  >5.175,00 TL</span
+                >
+              </div>
+            </li>
+            <li class="flex flex-col items-center justify-center text-center">
+              <div>
+                <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+              </div>
+              <div>
+                <p class="font-normal text-base py-5">
+                  MİLANO ALTIN SATEN 89 PARÇA DERİ KUTULU ÇATAL KAŞIK BIÇAK
+                  TAKIMI
+                </p>
+                <span
+                  class="block font-semibold text-base"
+                  style="color: #9f2842"
+                  >5.175,00 TL</span
+                >
+              </div>
+            </li>
+            <li class="flex flex-col items-center justify-center text-center">
+              <div>
+                <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+              </div>
+              <div>
+                <p class="font-normal text-base py-5">
+                  DALYAN SADE 72 PARÇA KUTULU ÇATAL KAŞIK BIÇAK TAKIMI
+                </p>
+                <span
+                  class="block font-semibold text-base"
+                  style="color: #9f2842"
+                  >5.175,00 TL</span
+                >
+              </div>
+            </li>
+            <li class="flex flex-col items-center justify-center text-center">
+              <div>
+                <img src="/assets/lalezar.png" class="max-w-full h-auto" />
+              </div>
+              <div>
+                <p class="font-normal text-base py-5">
+                  LALEZAR SADE 89 PARÇA DERİ KUTULU SET
+                </p>
+                <span
+                  class="block font-semibold text-base"
+                  style="color: #9f2842"
+                  >5.175,00 TL</span
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="lg:container lg:mx-auto flex flex-col gap-2 lg:flex-row py-10 lg:py-20"
+      >
+        <div>
+          <img src="/assets/fourleft.png" />
+        </div>
+        <div class="flex flex-col text-center items-center gap-5 pt-6">
+          <img src="/assets/fourmiddlesvg.svg" class="flex px-48" />
+          <p class="font-semibold text-base">* SADECE ONLİNE ÖZEL</p>
+          <h1
+            class="font-serif font-semibold text-3xl w-1/2"
+            style="line-height: 35px"
+          >
+            Çeyiz setleri ile mutfağınızda yeni bir başlangıç
+          </h1>
+          <button
+            class="bg-black text-white text-xs font-normal px-8 py-3 rounded-sm"
+          >
+            Alışverişe Başla
+          </button>
+        </div>
+        <div>
+          <img src="/assets/forurright.png" />
+        </div>
+      </div>
+
+      <div class="lg:container lg:mx-auto flex flex-col pb-40">
+        <h1
+          class="flex font-serif text-4xl font-semibold justify-center text-center lg:text-left mb-10"
+        >
+          Başka Neler Var Göz Atın!
+        </h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-10">
+          <div class="flex flex-col">
+            <a
+              href="#"
+              class="flex flex-row justify-between hover:text-red-500"
+              style="background-color: #f4f4f4"
+            >
+              <p class="pl-5 pt-5 text-sm font-normal uppercase">En Yeniler</p>
+              <img src="/assets/n.png" />
+            </a>
+            <div>
+              <span class="block text-sm font-normal pt-3">Tencere & Tava</span>
+              <span class="block text-sm font-normal pt-3"
+                >Çatal Kaşık Bıçak</span
+              >
+              <a href="#" class="block font-bold text-sm pt-3"
+                >Tüm En Yeniler</a
+              >
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex flex-row justify-between"
+              style="background-color: #f4f4f4"
+            >
+              <p class="pl-5 pt-5 text-sm font-normal uppercase">En Yeniler</p>
+              <img src="/assets/n.png" />
+            </div>
+            <div>
+              <span class="block text-sm font-normal pt-3">Tencere & Tava</span>
+              <span class="block text-sm font-normal pt-3"
+                >Çatal Kaşık Bıçak</span
+              >
+              <a href="#" class="block font-bold text-sm pt-3"
+                >Tüm En Yeniler</a
+              >
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex flex-row justify-between"
+              style="background-color: #f4f4f4"
+            >
+              <p class="pl-5 pt-5 text-sm font-normal uppercase">En Yeniler</p>
+              <img src="/assets/n.png" />
+            </div>
+            <div>
+              <span class="block text-sm font-normal pt-3">Tencere & Tava</span>
+              <span class="block text-sm font-normal pt-3"
+                >Çatal Kaşık Bıçak</span
+              >
+              <a href="#" class="block font-bold text-sm pt-3"
+                >Tüm En Yeniler</a
+              >
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex flex-row justify-between"
+              style="background-color: #f4f4f4"
+            >
+              <p class="pl-5 pt-5 text-sm font-normal uppercase">En Yeniler</p>
+              <img src="/assets/n.png" />
+            </div>
+            <div>
+              <span class="block text-sm font-normal pt-3">Tencere & Tava</span>
+              <span class="block text-sm font-normal pt-3"
+                >Çatal Kaşık Bıçak</span
+              >
+              <a href="#" class="block font-bold text-sm pt-3"
+                >Tüm En Yeniler</a
+              >
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex flex-row justify-between"
+              style="background-color: #f4f4f4"
+            >
+              <p class="pl-5 pt-5 text-sm font-normal uppercase">En Yeniler</p>
+              <img src="/assets/n.png" />
+            </div>
+            <div>
+              <span class="block text-sm font-normal pt-3">Tencere & Tava</span>
+              <span class="block text-sm font-normal pt-3"
+                >Çatal Kaşık Bıçak</span
+              >
+              <a href="#" class="block font-bold text-sm pt-3"
+                >Tüm En Yeniler</a
+              >
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex flex-row justify-between"
+              style="background-color: #f4f4f4"
+            >
+              <p class="pl-5 pt-5 text-sm font-normal uppercase">En Yeniler</p>
+              <img src="/assets/n.png" />
+            </div>
+            <div>
+              <span class="block text-sm font-normal pt-3">Tencere & Tava</span>
+              <span class="block text-sm font-normal pt-3"
+                >Çatal Kaşık Bıçak</span
+              >
+              <a href="#" class="block font-bold text-sm pt-3"
+                >Tüm En Yeniler</a
+              >
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex flex-row justify-between"
+              style="background-color: #f4f4f4"
+            >
+              <p class="pl-5 pt-5 text-sm font-normal uppercase">En Yeniler</p>
+              <img src="/assets/n.png" />
+            </div>
+            <div>
+              <span class="block text-sm font-normal pt-3">Tencere & Tava</span>
+              <span class="block text-sm font-normal pt-3"
+                >Çatal Kaşık Bıçak</span
+              >
+              <a href="#" class="block font-bold text-sm pt-3"
+                >Tüm En Yeniler</a
+              >
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex flex-row justify-between"
+              style="background-color: #f4f4f4"
+            >
+              <p class="pl-5 pt-5 text-sm font-normal uppercase">En Yeniler</p>
+              <img src="/assets/n.png" />
+            </div>
+            <div>
+              <span class="block text-sm font-normal pt-3">Tencere & Tava</span>
+              <span class="block text-sm font-normal pt-3"
+                >Çatal Kaşık Bıçak</span
+              >
+              <a href="#" class="block font-bold text-sm pt-3"
+                >Tüm En Yeniler</a
+              >
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div
+              class="flex flex-row justify-between"
+              style="background-color: #f4f4f4"
+            >
+              <p class="pl-5 pt-5 text-sm font-normal uppercase">En Yeniler</p>
+              <img src="/assets/n.png" />
+            </div>
+            <div>
+              <span class="block text-sm font-normal pt-3">Tencere & Tava</span>
+              <span class="block text-sm font-normal pt-3"
+                >Çatal Kaşık Bıçak</span
+              >
+              <a href="#" class="block font-bold text-sm pt-3"
+                >Tüm En Yeniler</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="lg:container lg:mx-auto flex flex-col justify-center items-center"
+      >
+        <div class="flex flex-row gap-1">
+          <img src="/assets/star.png" />
+          <img src="/assets/star.png" />
+          <img src="/assets/star.png" />
+          <img src="/assets/star.png" />
+          <img src="/assets/star.png" />
+        </div>
+        <div>
+          <h1
+            class="font-serif text-3xl font-semibold text-center"
+            style="padding-left: 300px; padding-right: 300px"
+          >
+            Hem paketlemesi hem kalitesi ile gene Nehir markası kendini belli
+            etmiş teşekkür ederim
+          </h1>
+        </div>
+        <div>
+          <span class="text-base font-normal" style="color: #ab0534"
+            >Elif C.</span
+          >
+        </div>
+      </div>
+
+      <div class="lg:container lg:mx-auto lg:py-40 py-10">
+        <div class="relative text-center">
+          <div class="flex flex-col items-center justify-center">
+            <div class="relative">
+              <h1 class="text-4xl font-semibold font-serif">
+                Nehir’in Hikayesi
+              </h1>
+              <img src="assets/videobanner.png" />
+              <a
+                href="#"
+                class="absolute inset-0 flex flex-col gap-5 items-center justify-center"
+              >
+                <img src="assets/play.svg.svg" class="hidden lg:block" />
+                <img
+                  src="assets/nehir-logo-w.svg.svg"
+                  class="hidden lg:block"
+                />
+                <p
+                  class="text-xs text-center uppercase text-white hidden lg:block"
+                >
+                  Ustalık ve İşçilik Hikayesini İzleyin
+                </p>
+              </a>
+              <p
+                class="font-serif text-base font-semibold mt-10"
+                style="color: #3b3b3b"
+              >
+                1981 yılından bugüne Türkiye'de el işçiliğiyle üretim yapıyoruz.
+                <br />
+                Hayallerimizi, umutlarımızı, tecrübe ve emeğimizle
+                birleştirdik...
+                <br />
+                Çeliğe işledik.
+              </p>
+              <div class="pt-5">
+                <a
+                  class="uppercase border border-solid py-4 px-10 text-sm"
+                  href="#"
+                  >Hikayeyi Oku</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:container lg:mx-auto bordered-list">
+        <ul class="flex flex-col lg:flex-row items-center text-center">
+          <li
+            class="flex flex-col justify-center items-center px-20 py-20 gap-5"
+          >
+            <img src="assets/ico-delivery.svg.svg" />
+            <p class="font-serif font-semibold text-lg">Hızlı Kargo</p>
+            <span class="text-xs font-normal"
+              >Ürünleriniz kargo firması tarafından ücretsiz ve sigortalı olarak
+              teslim edilecektir. Siparişiniz kargo firması tarafından size
+              teslim edilene kadar Nehir sorumluluğu ve güvencesi
+              altındadır.</span
+            >
+          </li>
+          <li
+            class="flex flex-col justify-center items-center px-20 py-20 gap-5"
+          >
+            <img
+              class="flex justify-center items-center"
+              src="assets/ico-adv.svg.svg"
+            />
+            <p class="font-serif font-semibold text-lg">
+              En Uygun Fiyat Avantajı
+            </p>
+            <span class="text-xs font-normal"
+              >%100 yerli üretimle, 18/10 Cr-Ni paslanmaz çelik kullanılarak, en
+              iyi hammaddeden, en uygun fiyatlı ve en kaliteli ürünler elde
+              edilir.</span
+            >
+          </li>
+          <li
+            class="flex flex-col justify-center items-center px-20 py-20 gap-5"
+          >
+            <img src="assets/ico-return.svg.svg" />
+            <p class="font-serif font-semibold text-lg">
+              Ücretsiz İade ve Değişim Garantisi
+            </p>
+            <span class="text-xs font-normal"
+              >www.nehir.com.tr üzerinden yaptığınız tüm alışverişlerde, 14 gün
+              içerisinde anında ücretsiz iade ve değişim imkanı
+              garantilidir.</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="flex flex-col justify-center items-center py-10 lg:container lg:mx-auto lg:py-20 lg:flex-row lg:justify-between lg:px-20"
+      >
+        <div class="flex flex-row gap-2">
+          <img
+            class="block w-auto h-6"
+            src="assets/bonuscardnew.png.png"
+            alt="bonuscard"
+          />
+          <p class="flex items-center text-xs" style="color: #929292">
+            Peşin Fiyatına 2 ve 4 Taksit İmkanı
+          </p>
+        </div>
+        <div class="flex flex-row gap-2">
+          <img class="block w-auto h-6" src="assets/axess.svg.svg" />
+          <p class="flex items-center text-xs" style="color: #929292">
+            Peşin Fiyatına 2 ve 4 Taksit İmkanı
+          </p>
+        </div>
+        <div class="flex flex-row gap-2">
+          <img class="block w-auto h-6" src="assets/maximum.svg.svg" />
+          <p class="flex items-center text-xs" style="color: #929292">
+            Peşin Fiyatına 2 ve 4 Taksit İmkanı
+          </p>
+        </div>
+      </div>
+
+      <div class="lg:container lg:mx-auto">
+        <div class="flex flex-col justify-center items-center text-center">
+          <div class="flex flex-col items-center">
+            <img src="assets/insta-ico.svg.svg" />
+            <p>nehirmutfak</p>
+          </div>
+          <div>
+            <span
+              >En yeni ürünleri, kampanya ve fırsatları sosyal<br />
+              medya hesaplarımızdan takip edebilirsiniz.</span
+            >
+          </div>
+          <div class="mb-10">
+            <button
+              class="flex flex-row items-center gap-2 px-6 py-2 mt-4 text-white w-full"
+              style="background-color: #9f2842"
+            >
+              Instagram'da takip et
+              <img src="assets/instaminicon.svg" />
+            </button>
+          </div>
+          <div class="flex flex-row gap-10">
+            <span class="text-xs font-normal">Facebook'ta takip et</span>
+            <span class="text-xs font-normal">Twitter'da takip et</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <img src="assets/div.subscribe-container.png" />
+      </div>
+
+      <div
+        class="hidden lg:justify-center lg:container lg:mx-auto lg:flex lg:flex-row lg:gap-20 lg:pt-20"
+      >
+        <div>
+          <div class="address">
+            <img
+              src="https://cdn-nehir.mncdn.com/vendor/img/logo.png"
+              alt="Nehir Logo"
+              loading="lazy"
+              width="133"
+              height="45"
+            />
+          </div>
+        </div>
+        <div>
+          <p class="text-base font-bold">İLETİŞİM</p>
+          <div class="text-xs font-normal">
+            <span style="color: #9f2842">Fabrika</span>
+            <br /><br />
+            <span
+              >Fabrika adresimizde perakende<br />satışımız
+              bulunmamaktadır.</span
+            >
+            <br /><br />
+            <span style="font-size: 8px"
+              >15 Temmuz Mh. 1498. Sokak No.35 Güneşli / İstanbul<br />
+            </span>
+            <span style="color: #9f2842">T.</span> 0 212 656 65 50<br />
+            <span style="color: #9f2842">F.</span> 0 212 651 75 71<br />
+            info@nehir.com.tr
+            <br /><br />
+            <span style="color: #9f2842">Fabrika</span>
+            <br /><br />
+            <span
+              >2417 Sok. Z Blok No.83 <br />
+              İstoç - İkitelli / İstanbul<br />Güneşli V.D. 630 100 0481</span
+            >
+          </div>
+        </div>
+        <div>
+          <p class="text-base font-bold">KURUMSAL</p>
+          <ul class="flex flex-col gap-5 text-xs font-normal">
+            <li><a href="#">Hakkımızda</a></li>
+            <li><a href="#">İade, Değişim ve Garanti</a></li>
+            <li><a href="#">İletişim</a></li>
+            <li><a href="#-sorulan-sorular">Sıkça Sorulan Sorular</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-base font-bold">MÜŞTERİ HİZMETLERİ</p>
+          <ul class="flex flex-col text-xs font-normal gap-3">
+            <li><a href="#">Çerez Politikası</a></li>
+            <li><a href="#">İlgili Kişi Başvuru Formu</a></li>
+            <li><a href="#">İngilizce Online Katalog</a></li>
+            <li><a href="#">İptal/İade Koşulları</a></li>
+            <li><a href="#">İşlem Rehberi</a></li>
+            <li>
+              <a href="#"
+                >Kişisel Verilerin Korunması ve İşlenmesi Politikası</a
+              >
+            </li>
+            <li><a href="#">Kullanım Kılavuzu</a></li>
+            <li><a href="#">Nehir Satış Noktaları</a></li>
+            <li><a href="#">Ödeme Türleri</a></li>
+            <li><a href="#">Üyelik Sözleşmesi</a></li>
+          </ul>
+          <div class="flex flex-col">
+            <span class="mt-10 text-xs">Bizi Takip Edin !</span>
+            <div class="flex flex-row gap-4">
+              <a href="https://www.facebook.com/NehirMutfak">
+                <img
+                  src="assets/faceicon.svg"
+                  class="border border-solid border-black rounded-full"
+                />
+              </a>
+              <a
+                href="https://twitter.com/nehirmutfakta"
+                class="flex items-center"
+              >
+                <img
+                  src="assets/twittericon.svg"
+                  class="border border-solid border-black rounded-full"
+                />
+              </a>
+              <a href="https://www.instagram.com/nehirmutfak/">
+                <img
+                  src="assets/instagramicon.svg"
+                  class="border border-solid border-black rounded-full"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $(".slider").slick({
+          autoplay: true,
+          autoplaySpeed: 2000,
+          prevArrow:
+            '<button type="button" class="slick-prev"><i class="fa-solid fa-angle-left"></i></button>',
+          nextArrow:
+            '<button type="button" class="slick-next"><i class="fa-solid fa-angle-right"></i></button>',
+        });
+      });
+      $(document).ready(function () {
+        $(".most-popular-slider").slick({
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 2000,
+          prevArrow:
+            '<button type="button" class="most-popular-slick-prev"><i class="fa-solid fa-angle-left"></i></button>',
+          nextArrow:
+            '<button type="button" class="most-popular-slick-next"><i class="fa-solid fa-angle-right"></i></button>',
+
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ],
+        });
+      });
+    </script>
     <script src="/script.js"></script>
   </body>
 </html>
